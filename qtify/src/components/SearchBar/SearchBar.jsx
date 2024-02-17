@@ -11,7 +11,7 @@ const SearchBar = () => {
         alignItems : 'center'
     }}
     >
-        <input className={styles.SearchBar} placeholder='Search a album of your choice'/>
+        <input className={styles.SearchBar} placeholder='Search a song of your choice'/>
         <button className={styles.searchIcon}>
             <SearchIcon />
         </button>

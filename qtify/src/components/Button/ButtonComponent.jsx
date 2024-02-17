@@ -9,6 +9,7 @@ const ButtonComponent = ({ text }) => {
         backgroundColor: "#121212",
         borderRadius: "10px",
         color: "#34c94b",
+        fontFamily: "Poppins"
       }}
     >
       {text}

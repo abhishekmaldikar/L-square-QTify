@@ -1,0 +1,15 @@
+.Hero{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+    margin: 2vh 25vw;
+}
+.HeroLogo{
+    width: 212px;
+    height: 212px;
+}
+.HeroFont{
+    color: #ffffff;
+    text-align: center;
+}

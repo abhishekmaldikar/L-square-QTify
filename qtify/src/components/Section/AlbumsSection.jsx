@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Section.module.css";
 import { Button } from "@mui/material";
-import { getTopAlbums } from "../../api/fetchAlbums";
+import { getTopAlbums , getNewAlbums} from "../../api/fetchAlbums";
 import CardsSection from "../Card/CardsSection";
 import axios from "axios"
 
@@ -9,32 +9,15 @@ const AlbumsSection = () => {
   const [topData , setTopData] = useState([]);
   const [newData , setNewData] = useState([]);
 
-  // async function fetchHelper (){
-  //   const data = await getTopAlbums();
-  //   setData(data)
-  // }
-
-const getTopAlbums = async () =>{
-    try {
-        let response = await axios.get("https://qtify-backend-labs.crio.do/albums/top")
-        setTopData(response.data)
-    } catch (e) {
-        console.log(e.response)
-    }
-}
-
-const getNewAlbums = async () =>{
-  try {
-      let response = await axios.get("https://qtify-backend-labs.crio.do/albums/new")
-      setNewData(response.data)
-  } catch (e) {
-      console.log(e.response)
+  async function fetchHelper (){
+    const tData = await getTopAlbums();
+    const nData = await getNewAlbums();
+    setTopData(tData)
+    setNewData(nData)
   }
-}
 
   useEffect(() => {
-    getTopAlbums();
-    getNewAlbums();
+    fetchHelper();
   },[]);
 
 

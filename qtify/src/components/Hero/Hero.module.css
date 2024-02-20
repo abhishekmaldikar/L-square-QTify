@@ -13,3 +13,13 @@
     color: #ffffff;
     text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+    .HeroLogo {
+        width: 100px;
+        height: 100px;
+    }
+    .Hero{
+        margin: 0vh 0vw;
+    }
+}

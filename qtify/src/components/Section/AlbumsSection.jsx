@@ -6,7 +6,8 @@ import CardsSection from "../Card/CardsSection";
 import axios from "axios"
 
 const AlbumsSection = () => {
-  const [data , setData] = useState([]);
+  const [topData , setTopData] = useState([]);
+  const [newData , setNewData] = useState([]);
 
   // async function fetchHelper (){
   //   const data = await getTopAlbums();
@@ -16,16 +17,26 @@ const AlbumsSection = () => {
 const getTopAlbums = async () =>{
     try {
         let response = await axios.get("https://qtify-backend-labs.crio.do/albums/top")
-        setData(response.data)
+        setTopData(response.data)
     } catch (e) {
         console.log(e.response)
     }
 }
 
+const getNewAlbums = async () =>{
+  try {
+      let response = await axios.get("https://qtify-backend-labs.crio.do/albums/new")
+      setNewData(response.data)
+  } catch (e) {
+      console.log(e.response)
+  }
+}
+
   useEffect(() => {
-    getTopAlbums()
+    getTopAlbums();
+    getNewAlbums();
   },[]);
-  console.log(data,"this ran");
+
 
   return (
     <div className={styles.mainDiv}>
@@ -44,8 +55,30 @@ const getTopAlbums = async () =>{
         </Button>
       </div>
       <div className={styles.gridSection}>
-        {data.length && (
-          data.map(({id,image,title,follows}) => (
+        {topData.length && (
+          topData.map(({id,image,title,follows}) => (
+            <CardsSection id={id} img ={image} title={title} follows={follows} key={id}/>
+          ))
+        )}
+      </div>
+
+      <div className={styles.titleSection}>
+        <h4>New Albums</h4>
+        <Button
+          variant="text"
+          sx={{
+            backgroundColor: "#121212",
+            borderRadius: "10px",
+            color: "#34c94b",
+            fontFamily: "Poppins",
+          }}
+        >
+          Collapse
+        </Button>
+      </div>
+      <div className={styles.gridSection}>
+        {newData.length && (
+          newData.map(({id,image,title,follows}) => (
             <CardsSection id={id} img ={image} title={title} follows={follows} key={id}/>
           ))
         )}

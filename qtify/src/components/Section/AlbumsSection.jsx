@@ -3,19 +3,29 @@ import styles from "./Section.module.css";
 import { Button } from "@mui/material";
 import { getTopAlbums } from "../../api/fetchAlbums";
 import CardsSection from "../Card/CardsSection";
+import axios from "axios"
 
 const AlbumsSection = () => {
   const [data , setData] = useState([]);
 
-  async function fetchHelper (){
-    const data = await getTopAlbums();
-    setData(data)
-  }
+  // async function fetchHelper (){
+  //   const data = await getTopAlbums();
+  //   setData(data)
+  // }
+
+const getTopAlbums = async () =>{
+    try {
+        let response = await axios.get("https://qtify-backend-labs.crio.do/albums/top")
+        setData(response.data)
+    } catch (e) {
+        console.log(e.response)
+    }
+}
 
   useEffect(() => {
-    fetchHelper()
+    getTopAlbums()
   },[]);
-  console.log(data,"this ran")
+  console.log(data,"this ran");
 
   return (
     <div className={styles.mainDiv}>

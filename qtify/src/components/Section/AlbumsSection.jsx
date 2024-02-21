@@ -3,7 +3,6 @@ import styles from "./Section.module.css";
 import { Button } from "@mui/material";
 import { getTopAlbums , getNewAlbums} from "../../api/fetchAlbums";
 import CardsSection from "../Card/CardsSection";
-import axios from "axios"
 
 const AlbumsSection = () => {
   const [topData , setTopData] = useState([]);

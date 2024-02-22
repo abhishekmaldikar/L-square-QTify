@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Section.module.css";
 import { Button } from "@mui/material";
-import { getTopAlbums , getNewAlbums} from "../../api/fetchAlbums";
 import CardsSection from "../Card/CardsSection";
 import Carousel from "../Carousel/Carousel";
 
 const Section = ({data , caseName }) => {
-  const [topData , setTopData] = useState([]);
-  const [newData , setNewData] = useState([]);
-  const [state, setState] = useState(true)
 
-  async function fetchHelper (){
-    const tData = await getTopAlbums();
-    const nData = await getNewAlbums();
-    setTopData(tData)
-    setNewData(nData)
-  }
-
-  useEffect(() => {
-    // fetchHelper();
-  },[]);
-
+  const [state, setState] = useState(false)
 
   return (
     <div className={styles.mainDiv}>

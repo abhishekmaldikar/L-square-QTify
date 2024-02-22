@@ -3,10 +3,12 @@ import styles from "./Section.module.css";
 import { Button } from "@mui/material";
 import { getTopAlbums , getNewAlbums} from "../../api/fetchAlbums";
 import CardsSection from "../Card/CardsSection";
+import Carousel from "../Carousel/Carousel";
 
-const AlbumsSection = () => {
+const Section = ({data , caseName }) => {
   const [topData , setTopData] = useState([]);
   const [newData , setNewData] = useState([]);
+  const [state, setState] = useState(true)
 
   async function fetchHelper (){
     const tData = await getTopAlbums();
@@ -16,14 +18,14 @@ const AlbumsSection = () => {
   }
 
   useEffect(() => {
-    fetchHelper();
+    // fetchHelper();
   },[]);
 
 
   return (
     <div className={styles.mainDiv}>
       <div className={styles.titleSection}>
-        <h4>Top Albums</h4>
+        {caseName === "topSongs" ? <h4>Top Albums</h4> : <h4>New Albums</h4>}
         <Button
           variant="text"
           sx={{
@@ -32,41 +34,28 @@ const AlbumsSection = () => {
             color: "#34c94b",
             fontFamily: "Poppins",
           }}
+          onClick={() => setState(!state)}
         >
-          Collapse
+          {
+            state ? "Collapse" : "Show all"
+          }
         </Button>
       </div>
-      <div className={styles.gridSection}>
-        {topData.length && (
-          topData.map(({id,image,title,follows}) => (
+      {
+        state ? (
+        <div className={styles.gridSection}>
+        {data.length && (
+          data.map(({id,image,title,follows}) => (
             <CardsSection id={id} img ={image} title={title} follows={follows} key={id}/>
           ))
         )}
       </div>
-
-      <div className={styles.titleSection}>
-        <h4>New Albums</h4>
-        <Button
-          variant="text"
-          sx={{
-            backgroundColor: "#121212",
-            borderRadius: "10px",
-            color: "#34c94b",
-            fontFamily: "Poppins",
-          }}
-        >
-          Collapse
-        </Button>
-      </div>
-      <div className={styles.gridSection}>
-        {newData.length && (
-          newData.map(({id,image,title,follows}) => (
-            <CardsSection id={id} img ={image} title={title} follows={follows} key={id}/>
-          ))
-        )}
-      </div>
+        ):(
+          <Carousel data={data}/>
+        )
+      }
     </div>
   );
 };
 
-export default AlbumsSection;
+export default Section;

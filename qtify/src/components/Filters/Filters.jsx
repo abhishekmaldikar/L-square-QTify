@@ -34,6 +34,11 @@ const Filters = ({ getGenres, data }) => {
             aria-label="songs filter Tabs"
             value={selectedValue}
             sx={{ marginBottom: "2rem" }}
+            TabIndicatorProps={{
+                style : {
+                    backgroundColor : "#34c94b",
+                }
+            }}
           >
             <Tab sx={{ color: "white" }} label="All" value="all" />
             {filterData.map((ele) => (

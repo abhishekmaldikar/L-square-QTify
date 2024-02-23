@@ -16,12 +16,13 @@ const Carousel = ({ data }) => {
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
       >
-        {data.map(({ id, image, title, follows }) => (
+        {data.map(({ id, image, title, follows,likes }) => (
           <SwiperSlide key={id}>
             <CardsSection
               img={image}
               title={title}
               follows={follows}
+              likes={likes}
             />
           </SwiperSlide>
         ))}

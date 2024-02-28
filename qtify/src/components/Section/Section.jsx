@@ -47,13 +47,14 @@ const Section = ({ data, caseName, getGenres }) => {
       {state ? (
         <div className={styles.gridSection}>
           {data.length &&
-            data.map(({ id, image, title, follows }) => (
+            data.map(({ id, image, title, follows, songs }) => (
               <CardsSection
                 id={id}
                 img={image}
                 title={title}
                 follows={follows}
                 key={id}
+                songs={songs}
               />
             ))}
         </div>

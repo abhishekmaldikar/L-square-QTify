@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./Card.module.css";
-import { Chip } from "@mui/material";
+import { Chip, Tooltip} from "@mui/material";
 
 
-const CardsSection = ({img,title,follows,likes}) => {
+const CardsSection = ({img,title,follows,likes,songs}) => {
+
   return (
-    <div >
+    <Tooltip title={follows ? `${songs?.length}` : null} placement="top" arrow>
       <div className={styles.albumCard}>
         <img className={styles.cardImg} src={img} alt="Album-Image" />
         <div className={styles.cardContain}>
@@ -20,7 +21,7 @@ const CardsSection = ({img,title,follows,likes}) => {
       <div className={styles.albumName}>
       <h6 style={{margin : 0}}>{title}</h6>
       </div>
-    </div>
+    </Tooltip>
   );
 };
 
